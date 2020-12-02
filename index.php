@@ -549,9 +549,11 @@ $(function(){
 		},'json');
 	}
 	function renderFileRow(data) {
-		var $link = $('<a class="name" />')
-			.attr('href', data.is_dir ? '#' + encodeURIComponent(data.path) : './' + data.path)
-			.text(data.name);
+	 var $link = $('<a class="name" />')          
+            .text(data.name);
+        if(data.is_dir){
+            $link.attr('href','#' + encodeURIComponent(data.path));
+        }    
 		var allow_direct_link = <?php echo $allow_direct_link?'true':'false'; ?>;
         	if (!data.is_dir && !allow_direct_link)  $link.css('pointer-events','none');
 		var $dl_link = $('<a/>').attr('href','?do=download&file='+ encodeURIComponent(data.path))
